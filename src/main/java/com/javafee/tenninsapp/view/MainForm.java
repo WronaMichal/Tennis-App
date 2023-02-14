@@ -12,6 +12,7 @@ public class MainForm {
     private JTextField textFieldDescription;
     private JTextField textFieldComment;
     private JButton buttonAccept;
+    private JButton buttonOpenTable;
 
     public MainForm() {
         frame = new JFrame("Tennis App");

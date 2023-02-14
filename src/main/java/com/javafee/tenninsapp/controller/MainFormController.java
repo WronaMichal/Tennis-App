@@ -10,17 +10,20 @@ import java.util.List;
 public class MainFormController {
     private MainForm mainForm;
     private FilesDB filesDB;
+    private TestFormController testFormController;
     private String userFileName = "user.data";
 
     public void control() {
         init();
 
         mainForm.getButtonAccept().addActionListener(e -> onClickButtonAccept());
+        mainForm.getButtonOpenTable().addActionListener(e -> onClickButtonOpenTable());
     }
 
     private void init() {
         mainForm = new MainForm();
         filesDB = new FilesDB();
+        testFormController = new TestFormController();
 
         mainForm.getFrame().setVisible(true);
     }
@@ -36,5 +39,9 @@ public class MainFormController {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    private void onClickButtonOpenTable() {
+        testFormController.control();
     }
 }
