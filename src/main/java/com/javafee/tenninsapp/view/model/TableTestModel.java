@@ -12,14 +12,14 @@ import java.util.List;
 
 public class TableTestModel extends AbstractTableModel {
     private List<TennisData> tennisDataList = new ArrayList<>();
-    private String[] columns;
-    private FilesDB filesDB = new FilesDB();
-    private String userFileName = "user.data";
+    private final String[] columns;
+    private final FilesDB filesDB = new FilesDB();
+    private final String userFileName = "src/test/user.data";
 
     @AllArgsConstructor
     @Getter
     enum TableTestColumn {
-        COL_NAME(0), COL_DESCRIPTION(1), COL_COMMENTS(2), UNKNOWN(-1);
+        COL_LOGIN(0), COL_PASSWORD(1), UNKNOWN(-1);
 
         private final Integer index;
 
@@ -31,14 +31,14 @@ public class TableTestModel extends AbstractTableModel {
     public TableTestModel() {
         super();
         prepareData();
-        columns = new String[]{"Name", "Description", "Comments"};
+        columns = new String[]{"Login", "Password"};
     }
 
     private void prepareData() {
         try {
             tennisDataList = filesDB.read(userFileName).stream().map(e -> {
                 String[] parts = e.split(",");
-                return TennisData.builder().comments(parts[2]).description(parts[1]).name(parts[0]).build();
+                return TennisData.builder().password(parts[1]).login(parts[0]).build();
             }).toList();
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -64,9 +64,8 @@ public class TableTestModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         TennisData tennisData = tennisDataList.get(rowIndex);
         return switch (TableTestColumn.getByIndex(columnIndex)) {
-            case COL_NAME -> tennisData.getName();
-            case COL_COMMENTS -> tennisData.getComments();
-            case COL_DESCRIPTION -> tennisData.getDescription();
+            case COL_LOGIN -> tennisData.getLogin();
+            case COL_PASSWORD -> tennisData.getPassword();
             case UNKNOWN -> throw new UnsupportedOperationException("Invalid column index: " + columnIndex);
         };
     }

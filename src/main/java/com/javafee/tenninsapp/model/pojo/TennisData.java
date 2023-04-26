@@ -6,7 +6,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class TennisData {
-    private String name;
-    private String description;
-    private String comments;
+    private String login;
+    private String password;
 }
