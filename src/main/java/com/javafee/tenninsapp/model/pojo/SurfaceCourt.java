@@ -4,7 +4,7 @@ public enum SurfaceCourt {
     GRASS {
         @Override
         public String toString() {
-            return "Trawa";
+            return "Trawka";
         }
     },
     CLAY {

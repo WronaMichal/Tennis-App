@@ -16,25 +16,9 @@
           <text value="Reservation Date"/>
         </properties>
       </component>
-      <component id="faf9b" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="From"/>
-        </properties>
-      </component>
-      <component id="e11dc" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="To"/>
-        </properties>
-      </component>
       <component id="42082" class="javax.swing.JLabel">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Court surface"/>
@@ -48,13 +32,18 @@
           <text value="Find"/>
         </properties>
       </component>
-      <component id="377c2" class="javax.swing.JSpinner" binding="From">
+      <component id="14a4d" class="com.toedter.calendar.JDateChooser" binding="jDateChooserReservationDate" custom-create="true">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </component>
+      <component id="5c4c3" class="javax.swing.JSpinner" binding="To" custom-create="true">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="72679" class="javax.swing.JSpinner" binding="To">
+      <component id="df399" class="javax.swing.JSpinner" binding="From" custom-create="true">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

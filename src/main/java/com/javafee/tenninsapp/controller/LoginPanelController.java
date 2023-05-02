@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 public class LoginPanelController {
@@ -22,11 +23,12 @@ public class LoginPanelController {
     private User activeUser;
     private List<User> userList;
 
-    public LoginPanelController() {
+    public LoginPanelController() throws IOException {
         this.filesDB = new FilesDB();
         this.userList = filesDB.readUser("user.data");
     }
-    public void control() {
+
+    public void control() throws IOException {
         init();
 
         loginPanel.getButtonRegister().addActionListener(e -> onClickButtonRegister());
@@ -34,7 +36,7 @@ public class LoginPanelController {
         loginPanel.getButtonOpenTable().addActionListener(e -> onClickButtonOpenTable());
     }
 
-    private void init() {
+    private void init() throws IOException {
         loginPanel = new LoginPanel();
         testFormController = new TestFormController();
         registerPanelController = new RegisterPanelController();
@@ -77,7 +79,6 @@ public class LoginPanelController {
     }
 
     private User login(String username, String password) {
-        //TODO czemu musze ponownie inicjalizować listę jak mam ją w init()? Tak samo w Register Panel
         Optional<User> optionalUser = userList.stream()
                 .filter(user -> (user.getEmailAddress().equals(username) || user.getPhoneNumber().equals(username))
                         && user.getPassword().equals(password)
