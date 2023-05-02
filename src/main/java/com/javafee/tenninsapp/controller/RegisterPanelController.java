@@ -6,6 +6,7 @@ import com.javafee.tenninsapp.view.RegisterPanel;
 import com.javafee.tenninsapp.view.utils.Utils;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,6 @@ public class RegisterPanelController {
 
     public RegisterPanelController() {
         this.filesDB = new FilesDB();
-        //TODO czy powinienem tworzyć konstruktor czy da sie to zrobic samym init()?
     }
 
     public void control() {
@@ -59,13 +59,18 @@ public class RegisterPanelController {
             error = "Hasła nie są identyczne";
         }
         if (isValid) {
-            User user = registerPanelController.register(phoneNumber, password, emailAddress);
-            if (user != null) {
-                loginPanelController.control();
-            } else {
-                Utils.displayOptionPanel("Error occurred, detailed message: " + "Such user with this phone number or email address already exists", "Error",
-                        JOptionPane.ERROR_MESSAGE, registerPanel.getFrame());
-                System.err.println("Such user with this phone number or email address already exists");
+            try {
+                User user = registerPanelController.register(phoneNumber, password, emailAddress);
+
+                if (user != null) {
+                    loginPanelController.control();
+                } else {
+                    Utils.displayOptionPanel("Error occurred, detailed message: " + "Such user with this phone number or email address already exists", "Error",
+                            JOptionPane.ERROR_MESSAGE, registerPanel.getFrame());
+                    System.err.println("Such user with this phone number or email address already exists");
+                }
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
             }
         } else {
             Utils.displayOptionPanel("Error occurred, detailed message: " + error, "Error",
@@ -74,9 +79,8 @@ public class RegisterPanelController {
         }
         System.out.println(emailAddress + " " + phoneNumber + " " + password);
     }
-    private User register(String phoneNumber, String password, String emailAddress) {
+    private User register(String phoneNumber, String password, String emailAddress) throws IOException {
         List<User> userList = filesDB.readUser(userFileName);
-        //TODO Baza nie wczytuje sie gdy nie ma zadnego rekordu, muszę wpisać ręcznie pierwszy rekord do pliku
         if (!userList.stream()
                 .filter(user -> user.getPhoneNumber().equals(phoneNumber) ||
                         user.getEmailAddress().equals(emailAddress))
@@ -85,7 +89,7 @@ public class RegisterPanelController {
         else {
             User newUser = new User(phoneNumber, password, emailAddress, false);
             userList.add(newUser);
-            filesDB.saveUser(newUser);
+            filesDB.saveUser(newUser, userFileName);
             return newUser;
         }
     }

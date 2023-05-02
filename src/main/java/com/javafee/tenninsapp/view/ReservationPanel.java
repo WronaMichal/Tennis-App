@@ -1,14 +1,11 @@
 package com.javafee.tenninsapp.view;
 
-import com.javafee.tenninsapp.model.pojo.SurfaceCourt;
+import com.toedter.calendar.JDateChooser;
 import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.Instant;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Objects;
+
 @Getter
 public class ReservationPanel {
 
@@ -17,6 +14,7 @@ public class ReservationPanel {
     private JButton buttonSearch;
     private JSpinner From;
     private JSpinner To;
+    private JDateChooser jDateChooserReservationDate;
     public static String courtSurface;
 
     public ReservationPanel() {
@@ -32,6 +30,11 @@ public class ReservationPanel {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        jDateChooserReservationDate = new JDateChooser();
+        From =  new JSpinner();
+        To =  new JSpinner();
+
+        From.setModel(new SpinnerNumberModel(1, 1, 12, 1));
+        To.setModel(new SpinnerNumberModel(1, 1, 12, 1));
     }
 }
