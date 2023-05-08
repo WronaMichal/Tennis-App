@@ -44,7 +44,6 @@ public class RegisterPanelController {
         if (!emailAddress.matches("^(.+)@(.+)$")) {
             isValid = false;
             error = "Adres mailowy jest nieprawidłowy";
-            //TODO jak zrobić, żeby JLabel podświetlał mi się na czerwono przy błędzie? Czy potrzebne?
         }
         if (!phoneNumber.matches("^\\d{9}$")) {
             isValid = false;

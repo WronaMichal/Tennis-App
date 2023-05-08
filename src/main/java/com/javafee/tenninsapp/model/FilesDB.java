@@ -1,5 +1,6 @@
 package com.javafee.tenninsapp.model;
 
+import com.javafee.tenninsapp.model.pojo.Court;
 import com.javafee.tenninsapp.model.pojo.Reservation;
 import com.javafee.tenninsapp.model.pojo.User;
 import lombok.AllArgsConstructor;
@@ -47,20 +48,17 @@ public class FilesDB {
         Files.write(p, users, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
-//    public void saveUser(User user) {
-//        BufferedWriter bw = null;
-//        try {
-//            bw = new BufferedWriter(new FileWriter("C:\\Users\\Michał\\git\\Tennis-App\\user.data", true));
-//            bw.write(System.lineSeparator() + user.toString()
-//            );
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (bw != null)
-//                    bw.close();
-//            } catch (IOException e) {
-//            }
-//        }
-//    }
+    public List<Court> readCourt(String path) throws IOException {
+        return Files.readAllLines(Path.of(path)).stream()
+                .map(e -> Court.fromString(e.split(","))).toList();
+    }
+
+    public void saveCourt(Court court, String path) throws IOException {
+        Path p = Path.of(path);
+        List<String> courts = Files.readAllLines(p);
+        courts.add(court.toString());
+        Files.write(p, courts, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+
 }

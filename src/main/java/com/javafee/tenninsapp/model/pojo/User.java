@@ -1,7 +1,6 @@
 package com.javafee.tenninsapp.model.pojo;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 

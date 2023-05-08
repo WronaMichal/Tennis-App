@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+@Getter
 public class LoginPanelController {
     private LoginPanel loginPanel;
     private RegisterPanelController registerPanelController;
