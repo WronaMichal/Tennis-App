@@ -1,11 +1,9 @@
 package com.javafee.tenninsapp.controller;
 
-import com.javafee.tenninsapp.view.AvailableSpotsForm;
 import com.javafee.tenninsapp.view.ReservationPanel;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Objects;
 
 public class ReservationPanelController {
     private ReservationPanel reservationPanel;
@@ -24,7 +22,7 @@ public class ReservationPanelController {
 
     private void onClickButtonSearch() {
         Date date = reservationPanel.getJDateChooserReservationDate().getDate();
-        String courtType = String.valueOf(reservationPanel.getComboBoxCourtSurface().getSelectedIndex());
+        String courtType = String.valueOf(reservationPanel.getComboBoxCourtSurface().getSelectedItem().toString());
         LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
         LocalDateTime startingTime = localDateTime.withHour((Integer) reservationPanel.getFrom().getValue());

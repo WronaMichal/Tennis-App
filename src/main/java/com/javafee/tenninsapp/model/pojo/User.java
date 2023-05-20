@@ -1,14 +1,13 @@
 package com.javafee.tenninsapp.model.pojo;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private String phoneNumber;
     private String password;
@@ -23,14 +22,13 @@ public class User {
         this.isAdmin = isAdmin;
     }
     public static User fromString(String[] properties){
-        return new User(properties[0],
-                properties[1],
-                properties[2],
-                Boolean.parseBoolean(properties[3]));
+        return User.builder().phoneNumber(properties[0]).password(properties[1])
+                .emailAddress(properties[2]).isAdmin(Boolean.parseBoolean(properties[3])).build();
     }
 
     @Override
     public String toString() {
         return phoneNumber + "," + password +  "," + emailAddress +  "," + isAdmin;
     }
+    //TODO czy tutaj w toString też mam używać buildera??
 }

@@ -36,8 +36,8 @@ public class ReservationPanel {
         From =  new JSpinner();
         To =  new JSpinner();
 
-        From.setModel(new SpinnerNumberModel(8, 8, 22, 1));
-        To.setModel(new SpinnerNumberModel(9, 9, 23, 1));
+        From.setModel(new SpinnerNumberModel(8, 8, 21, 1));
+        To.setModel(new SpinnerNumberModel(9, 9, 22, 1));
 
         comboBoxCourtSurface = new JComboBox<SurfaceCourt>();
         DefaultComboBoxModel<SurfaceCourt> courtComboBoxModel = new DefaultComboBoxModel<>();

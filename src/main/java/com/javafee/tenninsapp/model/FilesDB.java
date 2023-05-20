@@ -11,7 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @AllArgsConstructor
@@ -24,15 +27,26 @@ public class FilesDB {
         Files.write(Paths.get(path), content);
     }
 
-    public List<Reservation> readReservation(String path) throws IOException {
-        return Files.readAllLines(Path.of(path)).stream()
-                .map(e -> Reservation.fromString(e.split(","))).toList();
+    public List<Reservation> readReservation(String path, Map<Integer, Court> courtMap, Map<String, User> userMap) throws IOException {
+        List<Reservation> reservationList = new ArrayList<>();
+        BufferedReader br = null;
+        br = new BufferedReader(new FileReader(path));
+        String nextLine = br.readLine();
+        while (null != nextLine) {
+            String[] properties = nextLine.split(",");
+            reservationList.add(new Reservation(Integer.parseInt(properties[0]),
+                    LocalDateTime.parse(properties[1]), LocalDateTime.parse(properties[2]),
+                    userMap.get(properties[3]), courtMap.get(Integer.parseInt(properties[4]))));
+            nextLine = br.readLine();
+        }
+        br.close();
+        return reservationList;
     }
 
-    public void saveReservation(User user, String path) throws IOException {
+    public void saveReservation(Reservation reservation, String path) throws IOException {
         Path p = Path.of(path);
         List<String> users = Files.readAllLines(p);
-        users.add(user.toString());
+        users.add(reservation.toString());
         Files.write(p, users, StandardOpenOption.TRUNCATE_EXISTING);
     }
 

@@ -32,7 +32,6 @@ public class AvailableSpotsForm {
                 .getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH)));
         frame.pack();
     }
-
     private void createUIComponents() {
         TableAvailableSpots = new JTable();
         new TableFilterHeader(TableAvailableSpots);
