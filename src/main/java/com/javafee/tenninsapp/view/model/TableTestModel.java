@@ -1,5 +1,6 @@
 package com.javafee.tenninsapp.view.model;
 
+import com.javafee.tenninsapp.controller.AvailableSpotsFormController;
 import com.javafee.tenninsapp.model.FilesDB;
 import com.javafee.tenninsapp.model.pojo.TennisData;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ public class TableTestModel extends AbstractTableModel {
     private List<TennisData> tennisDataList = new ArrayList<>();
     private final String[] columns;
     private final FilesDB filesDB = new FilesDB();
-    private final String userFileName = "src/test/user.data";
+    private final String userFileName = "user.data";
 
     @AllArgsConstructor
     @Getter

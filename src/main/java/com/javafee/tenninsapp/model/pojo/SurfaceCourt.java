@@ -1,22 +1,12 @@
 package com.javafee.tenninsapp.model.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum SurfaceCourt {
-    GRASS {
-        @Override
-        public String toString() {
-            return "Trawka";
-        }
-    },
-    CLAY {
-        @Override
-        public String toString() {
-            return "Mączka";
-        }
-    },
-    HARD {
-        @Override
-        public String toString() {
-            return "Twarda";
-        }
-    }
+    GRASS("Trawka"), CLAY("Mączka"), HARD("Harda");
+
+    String val;
 }

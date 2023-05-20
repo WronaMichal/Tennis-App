@@ -1,6 +1,5 @@
 package com.javafee.tenninsapp.controller;
 import com.javafee.tenninsapp.view.MainPanel;
-import com.javafee.tenninsapp.view.ReservationPanel;
 
 public class MainPanelController {
     private MainPanel mainPanel;

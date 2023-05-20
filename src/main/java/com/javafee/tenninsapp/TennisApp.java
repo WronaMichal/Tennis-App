@@ -7,11 +7,7 @@ import java.io.IOException;
 
 public class TennisApp {
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            new LoginPanelController().control();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        new LoginPanelController().control();
     }
 }

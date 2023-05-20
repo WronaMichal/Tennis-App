@@ -1,13 +1,13 @@
 package com.javafee.tenninsapp.controller;
 
 import com.javafee.tenninsapp.view.ReservationPanel;
-
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class ReservationPanelController {
     private ReservationPanel reservationPanel;
-    private ReservationSpecificationController reservationSpecificationController;
+    private AvailableSpotsFormController availableSpotsFormController;
 
     public void control() {
         init();
@@ -21,13 +21,16 @@ public class ReservationPanelController {
     }
 
     private void onClickButtonSearch() {
-        reservationSpecificationController.control();
-        // pobranie daty z pola DateChooser
         Date date = reservationPanel.getJDateChooserReservationDate().getDate();
-        // konwersja Date na LocalDateTime
-        LocalDateTime localDateTime = LocalDateTime.from(date.toInstant());
-        // ustawienie na obiekcie godziny oraz minuty pobierajac wartosci ze Spinnerow
-        localDateTime.withHour((Integer) reservationPanel.getFrom().getValue());
-        localDateTime.withMinute((Integer) reservationPanel.getTo().getValue());
+        String courtType = String.valueOf(reservationPanel.getComboBoxCourtSurface().getSelectedItem().toString());
+        LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        LocalDateTime startingTime = localDateTime.withHour((Integer) reservationPanel.getFrom().getValue());
+        LocalDateTime endingTime = localDateTime.withHour((Integer) reservationPanel.getTo().getValue());
+        System.out.println(courtType);
+        System.out.println(startingTime);
+        System.out.println(endingTime);
+        availableSpotsFormController = new AvailableSpotsFormController(startingTime, endingTime, courtType);
+        availableSpotsFormController.control();
     }
 }

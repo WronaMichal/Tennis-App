@@ -1,25 +1,18 @@
 package com.javafee.tenninsapp.controller;
 
-import com.javafee.tenninsapp.model.FilesDB;
 import com.javafee.tenninsapp.model.pojo.User;
 import com.javafee.tenninsapp.view.RegisterPanel;
 import com.javafee.tenninsapp.view.utils.Utils;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class RegisterPanelController {
     private RegisterPanel registerPanel;
     private LoginPanelController loginPanelController;
-    private RegisterPanelController registerPanelController;
-    private FilesDB filesDB;
-    private final String userFileName = "user.data";
+   private UserController userController;
 
-    public RegisterPanelController() {
-        this.filesDB = new FilesDB();
-    }
+
 
     public void control() {
         init();
@@ -29,7 +22,6 @@ public class RegisterPanelController {
 
     private void init() {
         registerPanel = new RegisterPanel();
-        registerPanelController = new RegisterPanelController();
         registerPanel.getFrame().setVisible(true);
     }
 
@@ -44,7 +36,6 @@ public class RegisterPanelController {
         if (!emailAddress.matches("^(.+)@(.+)$")) {
             isValid = false;
             error = "Adres mailowy jest nieprawidłowy";
-            //TODO jak zrobić, żeby JLabel podświetlał mi się na czerwono przy błędzie? Czy potrzebne?
         }
         if (!phoneNumber.matches("^\\d{9}$")) {
             isValid = false;
@@ -60,7 +51,7 @@ public class RegisterPanelController {
         }
         if (isValid) {
             try {
-                User user = registerPanelController.register(phoneNumber, password, emailAddress);
+                User user = userController.register(phoneNumber, password, emailAddress);
 
                 if (user != null) {
                     loginPanelController.control();
@@ -78,19 +69,5 @@ public class RegisterPanelController {
             System.err.println(error);
         }
         System.out.println(emailAddress + " " + phoneNumber + " " + password);
-    }
-    private User register(String phoneNumber, String password, String emailAddress) throws IOException {
-        List<User> userList = filesDB.readUser(userFileName);
-        if (!userList.stream()
-                .filter(user -> user.getPhoneNumber().equals(phoneNumber) ||
-                        user.getEmailAddress().equals(emailAddress))
-                .collect(Collectors.toList()).isEmpty())
-            return null;
-        else {
-            User newUser = new User(phoneNumber, password, emailAddress, false);
-            userList.add(newUser);
-            filesDB.saveUser(newUser, userFileName);
-            return newUser;
-        }
     }
 }
